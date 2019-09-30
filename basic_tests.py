@@ -12,7 +12,8 @@ if __name__ == '__main__':
     # data={'account_email': 'herbwang1989@gmail.com'})
 
     # sending email by account_email
-    result = requests.post('http://service.datascicamp.com:30080/api/account/validate-password',
-                  data={'account_email': 'xinyaotian@yeah.net', 'password': '123'})
+    result = requests.post('http://127.0.0.1:4998/api/account/account-creating',
+                           data={'account_email': 'system_admin@thisweb.net', 'password': 'admin123456',
+                                 'account_nickname': '系统管理员'})
     print(result.content)
     pass

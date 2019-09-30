@@ -54,15 +54,19 @@ def create_new_account():
     account_email = request.form.get('account_email')
     password = request.form.get('password')
     account_nickname = request.form.get('account_nickname')
+    account_status = request.form.get('account_status')
 
     # check faults
     if password is None or account_email is None:
         return bad_request('This post must include both account_email and password fields.')
     if Account.query.filter_by(account_email=account_email).first():
         return bad_request('please use a different account_email.')
+    if account_status is None:
+        account_status = 'unknown'
+
 
     # db operations
-    new_account = Account(account_email=account_email, account_nickname=account_nickname, account_status='unverify')
+    new_account = Account(account_email=account_email, account_nickname=account_nickname, account_status=account_status)
     new_account.set_password(password)
     db.session.add(new_account)
     db.session.commit()
